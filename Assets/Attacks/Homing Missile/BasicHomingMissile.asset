@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3013aa327d2be946bdcb92b0c57ed05, type: 3}
+  m_Name: BasicHomingMissile
+  m_EditorClassIdentifier: 
+  lastUsedTime: 5.6047273
+  damage: 1
+  cooldown: 1
+  pierce: 5
+  lifespan: 3
+  speed: 20
+  rotationSpeed: 5
+  missilePrefab: {fileID: 6802360650151849930, guid: 663a740f85ada66479553da9518b1937, type: 3}
