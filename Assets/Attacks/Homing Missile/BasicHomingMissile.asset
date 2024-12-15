@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3013aa327d2be946bdcb92b0c57ed05, type: 3}
   m_Name: BasicHomingMissile
   m_EditorClassIdentifier: 
-  lastUsedTime: 5.6047273
+  attackName: 
+  lastUsedTime: 38.45808
+  autoAim: 1
   damage: 1
   cooldown: 1
-  pierce: 5
+  pierce: 3
   lifespan: 3
   speed: 20
   rotationSpeed: 5
