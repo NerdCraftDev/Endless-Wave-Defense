@@ -5,6 +5,7 @@ public abstract class Attack : ScriptableObject
     public string attackName;
     private bool autoAttack;
     public float lastUsedTime;
+    public bool autoAim;
     public int damage;
 
     public virtual void Initialize(GameObject owner) { lastUsedTime = Time.time; }

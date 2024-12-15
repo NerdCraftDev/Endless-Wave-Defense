@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf694f4d2f769864784c077ab1f80f73, type: 3}
   m_Name: BasicFireball
   m_EditorClassIdentifier: 
+  attackName: 
   lastUsedTime: 110.83011
   damage: 1
   cooldown: 0.5
   pierce: 1
   lifespan: 3
   speed: 20
+  autoAim: 0
   fireballPrefab: {fileID: 6802360650151849930, guid: 9330e24db53289b45a1230f48772be69, type: 3}

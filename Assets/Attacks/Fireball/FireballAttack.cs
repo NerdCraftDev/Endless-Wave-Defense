@@ -16,7 +16,7 @@ public class FireballAttack : Attack
         FireballBehaviour fireball = Instantiate(fireballPrefab, owner.transform.position, Quaternion.identity).GetComponent<FireballBehaviour>();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - owner.transform.position).normalized;
-        fireball.Initialize(speed, damage, pierce, lifespan, direction, false);
+        fireball.Initialize(speed, damage, pierce, lifespan, direction, autoAim);
 
         lastUsedTime = Time.time;
     }

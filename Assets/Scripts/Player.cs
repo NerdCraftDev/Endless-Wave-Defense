@@ -37,6 +37,13 @@ public class Player : MonoBehaviour
         {
             Attack();
         }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            // Toggle autoAim
+            foreach (var attack in attacks)
+            {
+                attack.autoAim = !attack.autoAim;
+            }
+        }
     }
 
     public void Move(Vector2 direction)
