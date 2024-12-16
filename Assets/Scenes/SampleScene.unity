@@ -251,7 +251,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000050498716, y: -0.000000025004153, z: 1.2626777e-16, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -492,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 924688915}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000000050498716, y: -0.000000025004153, z: -0.0000000017581755, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -632,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 1062841897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -665,9 +665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   attacks:
-  - {fileID: 11400000, guid: ad7aff7680131204a96e02fd5b479093, type: 2}
   - {fileID: 11400000, guid: aa4471317c5130f4ba50c1c3684315e5, type: 2}
-  - {fileID: 11400000, guid: 630cedfcfb71dc64985210a8752b548c, type: 2}
 --- !u!61 &1062841902
 BoxCollider2D:
   m_ObjectHideFlags: 0
