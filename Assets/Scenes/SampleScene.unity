@@ -665,7 +665,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   attacks:
+  - {fileID: 11400000, guid: ad7aff7680131204a96e02fd5b479093, type: 2}
   - {fileID: 11400000, guid: aa4471317c5130f4ba50c1c3684315e5, type: 2}
+  - {fileID: 11400000, guid: 630cedfcfb71dc64985210a8752b548c, type: 2}
 --- !u!61 &1062841902
 BoxCollider2D:
   m_ObjectHideFlags: 0

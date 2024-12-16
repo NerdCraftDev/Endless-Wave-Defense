@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: BasicHomingMissile
   m_EditorClassIdentifier: 
   attackName: 
-  lastUsedTime: 38.45808
-  autoAim: 1
+  lastUsedTime: 19.074482
+  autoAim: 0
   damage: 1
   cooldown: 1
   pierce: 3
   lifespan: 3
   speed: 20
-  rotationSpeed: 5
+  rotationSpeed: 3
   missilePrefab: {fileID: 6802360650151849930, guid: 663a740f85ada66479553da9518b1937, type: 3}
