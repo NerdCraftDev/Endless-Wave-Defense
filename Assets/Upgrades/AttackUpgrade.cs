@@ -7,6 +7,7 @@ public class AttackUpgrade : Upgrade
 
     public override void ApplyUpgrade(GameObject target)
     {
+        base.ApplyUpgrade(target);
         Debug.Log($"Applying {upgradeName} to {target.name}");
         if (target.TryGetComponent(out Player player))
         {

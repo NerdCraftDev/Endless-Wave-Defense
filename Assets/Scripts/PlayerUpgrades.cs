@@ -26,7 +26,7 @@ public class PlayerUpgrades : MonoBehaviour
         return options;
     }
 
-    private List<Upgrade> GetAvailableUpgrades()
+    public List<Upgrade> GetAvailableUpgrades()
     {
         return allUpgrades.Where(upgrade => !acquiredUpgrades.Contains(upgrade)
             && ArePrerequisitesMet(upgrade)).ToList();

@@ -53,6 +53,7 @@ public class Enemy : MonoBehaviour
         // Destroy the enemy
         Destroy(gameObject);
         EnemySpawner.Instance.enemies.Remove(this);
+        target.GetComponent<Player>().data.xp += 1;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

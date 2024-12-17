@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328d50643dc82c7419223750c2ee5c08, type: 3}
+  m_Name: Blade Circle U2
+  m_EditorClassIdentifier: 
+  upgradeName: Blade Circle
+  description: Adds a second outer ring of 5 faster blades.
+  icon: {fileID: 0}
+  prerequisites:
+  - {fileID: 11400000, guid: b851e4d3ba86b094180d95fff303a771, type: 2}
+  attack: {fileID: 11400000, guid: ac8e97431ec5a064093539aa0427bda8, type: 2}

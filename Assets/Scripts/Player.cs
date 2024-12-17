@@ -8,10 +8,9 @@ public class Player : MonoBehaviour
 {
     private PlayerMovement movement;
     private PlayerUpgrades playerUpgrades;
-    public int health = 5;
-    public Vector2 Position => transform.position;
-    public List<Attack> attacks;
+    public PlayerData data;
     public GameObject UpgradeGUI;
+    public Vector2 Position => transform.position;
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class Player : MonoBehaviour
         {
             playerUpgrades = gameObject.AddComponent<PlayerUpgrades>();
         }
-        foreach (var attack in attacks)
+        foreach (var attack in data.attacks)
         {
             attack.Initialize(gameObject);
         }
@@ -42,14 +41,16 @@ public class Player : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
             // Toggle autoAim
-            foreach (var attack in attacks)
+            foreach (var attack in data.attacks)
             {
                 attack.autoAim = !attack.autoAim;
             }
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (data.xp >= data.xpToUpgrade && playerUpgrades.GetAvailableUpgrades().Count > 0)
         {
             ShowUpgradeOptions();
+            data.xp -= data.xpToUpgrade;
+            data.xpToUpgrade += data.xpNeededPerLevel;
         }
     }
 
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
     }
 
     public void Attack() {
-        foreach (var attack in attacks)
+        foreach (var attack in data.attacks)
         {
             attack.Use(gameObject);
         }
@@ -68,17 +69,25 @@ public class Player : MonoBehaviour
     public void ShowUpgradeOptions()
     {
         List<Upgrade> options = playerUpgrades.GetUpgradeOptions();
-        foreach (var option in options)
+        if (options.Count > 0) { UpgradeGUI.SetActive(true); Time.timeScale = 0; }
+        for (int i = 0; i < 3; i++) 
         {
-            Debug.Log($"Upgrade Option: {option.upgradeName}");
-            UpgradeGUI.SetActive(true);
+            if (i >= options.Count) 
+            {
+                UpgradeGUI.transform.GetChild(i).gameObject.SetActive(false);
+                continue;
+            }
+            Upgrade option = options[i];
+            Debug.Log(option.upgradeName);
             // Display upgrade details on the buttons
             Transform upgradeBtn = UpgradeGUI.transform.GetChild(options.IndexOf(option));
-            upgradeBtn.GetComponentInChildren<TextMeshProUGUI>().text = option.upgradeName;
+            upgradeBtn.GetComponentInChildren<TextMeshProUGUI>().text = $"{option.upgradeName}\n\n{option.description}";
+            // upgradeBtn.GetComponent<Image>().sprite = option.icon;
             Button upgradeButton = upgradeBtn.GetComponent<Button>();
             upgradeButton.onClick.RemoveAllListeners();
             upgradeButton.onClick.AddListener(() => option.ApplyUpgrade(gameObject));
             upgradeButton.onClick.AddListener(() => UpgradeGUI.SetActive(false));
+            upgradeButton.onClick.AddListener(() => Time.timeScale = 1);
         }
     }
     public void SetSpeed(float speed)
@@ -89,9 +98,9 @@ public class Player : MonoBehaviour
     public void Damage(int damage)
     {
         // Reduce the player's health by damage
-        health -= damage;
+        data.health -= damage;
         // If the player's health is less than or equal to 0, call Die()
-        if (health <= 0)
+        if (data.health <= 0)
         {
             Die();
         }
@@ -111,7 +120,7 @@ public class Player : MonoBehaviour
     }
     public void AddAttack(Attack attack)
     {
-        attacks.Add(attack);
+        data.attacks.Add(attack);
         attack.Initialize(gameObject);
     }
 
@@ -121,7 +130,7 @@ public class Player : MonoBehaviour
         switch (stat)
         {
             case PlayerStat.Health:
-                health += amount;
+                data.health += amount;
                 break;
             case PlayerStat.Speed:
                 movement.speed += amount;
