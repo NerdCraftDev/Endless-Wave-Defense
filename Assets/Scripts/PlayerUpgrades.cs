@@ -9,7 +9,7 @@ public class PlayerUpgrades : MonoBehaviour
     [Header("All Available Upgrades")]
     public List<Upgrade> allUpgrades;
 
-    public void ShowUpgradeOptions()
+    public List<Upgrade> GetUpgradeOptions()
     {
         List<Upgrade> availableUpgrades = GetAvailableUpgrades();
 
@@ -23,7 +23,7 @@ public class PlayerUpgrades : MonoBehaviour
             availableUpgrades.RemoveAt(index);
         }
 
-        // Display options to the player (implement UI logic)
+        return options;
     }
 
     private List<Upgrade> GetAvailableUpgrades()
@@ -34,20 +34,11 @@ public class PlayerUpgrades : MonoBehaviour
 
     private bool ArePrerequisitesMet(Upgrade upgrade)
     {
-        foreach (var prereq in upgrade.prerequisites)
+        foreach (var prereq in upgrade.GetPrerequisites())
         {
             if (!acquiredUpgrades.Contains(prereq))
                 return false;
         }
         return true;
-    }
-
-    public void AcquireUpgrade(Upgrade upgrade)
-    {
-        if (!acquiredUpgrades.Contains(upgrade))
-        {
-            acquiredUpgrades.Add(upgrade);
-            upgrade.Apply(GetComponent<Player>());
-        }
     }
 }

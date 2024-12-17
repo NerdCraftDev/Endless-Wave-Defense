@@ -8,6 +8,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public float spawnRate = 1f;
     public float spawnDistance = 5f;
+    public float speed = 1f;
+    public int health = 1;
     public List<Player> players;
     public List<Enemy> enemies;
 
@@ -45,8 +47,10 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy(Player player) {
         // Spawn an Enemy at a random position within spawnRadius centered on the player
         Vector2 spawnPosition = (player != null ? player.Position : Vector2.zero) + Random.insideUnitCircle.normalized * spawnDistance;
-        Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform).GetComponent<Enemy>();
         enemy.SetTarget(player.transform);
+        enemy.SetSpeed(speed);
+        enemy.SetHealth(health);
         enemies.Add(enemy);
     }
 

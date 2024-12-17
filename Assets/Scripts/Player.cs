@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMovement))]
 public class Player : MonoBehaviour
@@ -9,6 +11,7 @@ public class Player : MonoBehaviour
     public int health = 5;
     public Vector2 Position => transform.position;
     public List<Attack> attacks;
+    public GameObject UpgradeGUI;
 
     private void Awake()
     {
@@ -44,6 +47,10 @@ public class Player : MonoBehaviour
                 attack.autoAim = !attack.autoAim;
             }
         }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            ShowUpgradeOptions();
+        }
     }
 
     public void Move(Vector2 direction)
@@ -60,9 +67,20 @@ public class Player : MonoBehaviour
 
     public void ShowUpgradeOptions()
     {
-        playerUpgrades.ShowUpgradeOptions();
+        List<Upgrade> options = playerUpgrades.GetUpgradeOptions();
+        foreach (var option in options)
+        {
+            Debug.Log($"Upgrade Option: {option.upgradeName}");
+            UpgradeGUI.SetActive(true);
+            // Display upgrade details on the buttons
+            Transform upgradeBtn = UpgradeGUI.transform.GetChild(options.IndexOf(option));
+            upgradeBtn.GetComponentInChildren<TextMeshProUGUI>().text = option.upgradeName;
+            Button upgradeButton = upgradeBtn.GetComponent<Button>();
+            upgradeButton.onClick.RemoveAllListeners();
+            upgradeButton.onClick.AddListener(() => option.ApplyUpgrade(gameObject));
+            upgradeButton.onClick.AddListener(() => UpgradeGUI.SetActive(false));
+        }
     }
-
     public void SetSpeed(float speed)
     {
         movement.SetSpeed(speed);

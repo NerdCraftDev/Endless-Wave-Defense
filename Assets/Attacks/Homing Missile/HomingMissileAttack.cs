@@ -15,7 +15,7 @@ public class HomingMissileAttack : Attack
     {
         if (Time.time < lastUsedTime + cooldown) return;
 
-        HomingMissileBehaviour missile = Instantiate(missilePrefab, owner.transform.position, Quaternion.identity).GetComponent<HomingMissileBehaviour>();
+        HomingMissileBehaviour missile = Instantiate(missilePrefab, owner.transform.position, Quaternion.identity, owner.transform).GetComponent<HomingMissileBehaviour>();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - owner.transform.position).normalized;
         missile.Initialize(speed, rotationSpeed, damage, pierce, lifespan, direction);

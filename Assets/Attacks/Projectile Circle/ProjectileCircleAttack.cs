@@ -14,7 +14,7 @@ public class ProjectileCircleAttack : Attack
 
         for (int i = 0; i < projectileCount; i++)
         {
-            ProjectileCircleBehaviour projectile = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity).GetComponent<ProjectileCircleBehaviour>();
+            ProjectileCircleBehaviour projectile = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity, owner.transform).GetComponent<ProjectileCircleBehaviour>();
             projectile.Initialize(speed, radius, damage, owner.transform, projectileCount, i);
         }
     }

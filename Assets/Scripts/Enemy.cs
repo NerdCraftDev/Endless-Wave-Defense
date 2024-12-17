@@ -25,6 +25,18 @@ public class Enemy : MonoBehaviour
         this.target = target;
     }
 
+    public void SetSpeed(float speed)
+    {
+        // Set the speed of the enemy
+        this.speed = speed;
+    }
+
+    public void SetHealth(int health)
+    {
+        // Set the health of the enemy
+        this.health = health;
+    }
+
     public void Damage(int damage)
     {
         // Reduce the enemy's health by damage
