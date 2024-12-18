@@ -1285,6 +1285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 1062841904}
   UpgradeGUI: {fileID: 866026798}
+  autoAttack: 0
 --- !u!61 &1062841902
 BoxCollider2D:
   m_ObjectHideFlags: 0

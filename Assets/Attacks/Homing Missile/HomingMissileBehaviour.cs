@@ -6,6 +6,7 @@ public class HomingMissileBehaviour : MonoBehaviour
     private float rotationSpeed = 20f; // Default rotation speed
     private int damage = 10; // Default damage
     private int pierce = 1; // Default pierce
+    public float maxDistance = 100f; // Default max distance to search for enemies
 
     private Transform _transform;
 
@@ -16,7 +17,7 @@ public class HomingMissileBehaviour : MonoBehaviour
 
     void Update()
     {
-        Vector2 targetDirection = FindClosestEnemyDirection(_transform);
+        Vector2 targetDirection = FindClosestEnemyDirection(_transform, maxDistance);
         if (targetDirection != Vector2.zero)
         {
             float step = rotationSpeed * Time.deltaTime;
@@ -44,12 +45,13 @@ public class HomingMissileBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(float speed, float rotationSpeed, int damage, int pierce, float lifespan, Vector3 direction)
+    public void Initialize(float speed, float rotationSpeed, int damage, int pierce, float lifespan, Vector3 direction, float maxHomingDistance)
     {
         this.speed = speed;
         this.rotationSpeed = rotationSpeed;
         this.damage = damage;
         this.pierce = pierce;
+        maxDistance = maxHomingDistance;
         Destroy(gameObject, lifespan);
 
         // Set the initial rotation to face the given direction
@@ -57,7 +59,7 @@ public class HomingMissileBehaviour : MonoBehaviour
         _transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    public static Vector3 FindClosestEnemyDirection(Transform origin)
+    public static Vector3 FindClosestEnemyDirection(Transform origin, float maxDistance = 100f)
     {
         Transform closest = null;
         float closestDistance = float.MaxValue;
@@ -65,7 +67,7 @@ public class HomingMissileBehaviour : MonoBehaviour
         foreach (var enemy in EnemySpawner.Instance.enemies)
         {
             float distance = Vector3.Distance(origin.position, enemy.transform.position);
-            if (distance < closestDistance)
+            if (distance < closestDistance && distance <= maxDistance)
             {
                 closestDistance = distance;
                 closest = enemy.transform;
@@ -78,7 +80,7 @@ public class HomingMissileBehaviour : MonoBehaviour
         }
         else
         {
-            return Vector3.zero; // No enemies found
+            return Vector3.zero; // No enemies found within maxDistance
         }
     }
 }

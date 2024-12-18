@@ -8,6 +8,7 @@ public class HomingMissileAttack : Attack
     public int lifespan;
     public float speed;
     public float rotationSpeed;
+    public float maxHomingDistance;
 
     public GameObject missilePrefab;
 
@@ -18,7 +19,7 @@ public class HomingMissileAttack : Attack
         HomingMissileBehaviour missile = Instantiate(missilePrefab, owner.transform.position, Quaternion.identity).GetComponent<HomingMissileBehaviour>();
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = (mousePosition - owner.transform.position).normalized;
-        missile.Initialize(speed, rotationSpeed, damage, pierce, lifespan, direction);
+        missile.Initialize(speed, rotationSpeed, damage, pierce, lifespan, direction, maxHomingDistance);
 
         lastUsedTime = Time.time;
     }
