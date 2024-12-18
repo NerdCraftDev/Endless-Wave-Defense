@@ -19,5 +19,5 @@ MonoBehaviour:
   cooldown: 0.5
   pierce: 1
   lifespan: 3
-  speed: 20
+  speed: 25
   fireballPrefab: {fileID: 6802360650151849930, guid: 9330e24db53289b45a1230f48772be69, type: 3}

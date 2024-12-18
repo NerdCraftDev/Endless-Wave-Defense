@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class Attack : ScriptableObject
 {
     public string attackName;
-    private bool autoAttack;
     public float lastUsedTime;
     public bool autoAim;
     public int damage;

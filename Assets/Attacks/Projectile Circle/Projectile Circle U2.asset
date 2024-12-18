@@ -17,6 +17,6 @@ MonoBehaviour:
   autoAim: 0
   damage: 1
   speed: 5
-  radius: 6
-  projectileCount: 5
+  radius: 9
+  projectileCount: 8
   projectilePrefab: {fileID: 6802360650151849930, guid: a23277dbb59983f4e8480fd59ec19d5d, type: 3}

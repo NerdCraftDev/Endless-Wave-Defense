@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public PlayerData data;
     public GameObject UpgradeGUI;
     public Vector2 Position => transform.position;
+    public bool autoAttack = false;
 
     private void Awake()
     {
@@ -34,16 +35,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        // If the player presses the space key, call Attack()
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || autoAttack)
         {
             Attack();
         }
         if (Input.GetKeyDown(KeyCode.Space)) {
             // Toggle autoAim
+            autoAttack = !autoAttack;
             foreach (var attack in data.attacks)
             {
-                attack.autoAim = !attack.autoAim;
+                attack.autoAim = autoAttack;
             }
         }
         if (data.xp >= data.xpToUpgrade && playerUpgrades.GetAvailableUpgrades().Count > 0)

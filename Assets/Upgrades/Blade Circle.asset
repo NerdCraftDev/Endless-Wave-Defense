@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 328d50643dc82c7419223750c2ee5c08, type: 3}
-  m_Name: Blade Circle U2
+  m_Name: Blade Circle
   m_EditorClassIdentifier: 
   upgradeName: Blade Circle
-  description: A third ring of supersonic blades spin around you
+  description: A circle of 3 blades will rotate around you, damaging anything that
+    comes in contact.
   icon: {fileID: 0}
-  prerequisites:
-  - {fileID: 11400000, guid: ca72b60d8f9c02047b32ae29b0597721, type: 2}
-  attack: {fileID: 11400000, guid: 8dea09d2e8db2f54cbc929e16fb45400, type: 2}
+  prerequisites: []
+  attack: {fileID: 11400000, guid: 630cedfcfb71dc64985210a8752b548c, type: 2}

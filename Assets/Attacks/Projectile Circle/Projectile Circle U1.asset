@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3013aa327d2be946bdcb92b0c57ed05, type: 3}
-  m_Name: BasicHomingMissile
+  m_Script: {fileID: 11500000, guid: 023e0fc1e9631514ba8d0a3e8e979bc6, type: 3}
+  m_Name: Projectile Circle U1
   m_EditorClassIdentifier: 
   attackName: 
-  lastUsedTime: 41.102463
+  lastUsedTime: 0
   autoAim: 0
   damage: 1
-  cooldown: 2
-  pierce: 3
-  lifespan: 3
-  speed: 20
-  rotationSpeed: 3
-  missilePrefab: {fileID: 6802360650151849930, guid: 663a740f85ada66479553da9518b1937, type: 3}
+  speed: 5
+  radius: 6
+  projectileCount: 5
+  projectilePrefab: {fileID: 6802360650151849930, guid: a23277dbb59983f4e8480fd59ec19d5d, type: 3}

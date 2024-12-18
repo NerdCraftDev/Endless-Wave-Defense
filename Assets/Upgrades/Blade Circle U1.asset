@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Blade Circle U1
   m_EditorClassIdentifier: 
   upgradeName: Blade Circle
-  description: A circle of 3 blades will rotate around you, damaging anything that
-    comes in contact.
+  description: Adds a second outer ring of 5 faster blades.
   icon: {fileID: 0}
-  prerequisites: []
-  attack: {fileID: 11400000, guid: 630cedfcfb71dc64985210a8752b548c, type: 2}
+  prerequisites:
+  - {fileID: 11400000, guid: b851e4d3ba86b094180d95fff303a771, type: 2}
+  attack: {fileID: 11400000, guid: ac8e97431ec5a064093539aa0427bda8, type: 2}

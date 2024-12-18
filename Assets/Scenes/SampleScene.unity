@@ -1178,6 +1178,7 @@ GameObject:
   - component: {fileID: 1062841901}
   - component: {fileID: 1062841900}
   - component: {fileID: 1062841903}
+  - component: {fileID: 1062841904}
   - component: {fileID: 1062841902}
   m_Layer: 3
   m_Name: Player
@@ -1282,9 +1283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1196755ce372904da13f125e48580e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
-  attacks:
-  - {fileID: 11400000, guid: ad7aff7680131204a96e02fd5b479093, type: 2}
+  data: {fileID: 1062841904}
   UpgradeGUI: {fileID: 866026798}
 --- !u!61 &1062841902
 BoxCollider2D:
@@ -1349,6 +1348,26 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b851e4d3ba86b094180d95fff303a771, type: 2}
   - {fileID: 11400000, guid: 10600407e4ae13f47b2c67f1d0b469e4, type: 2}
   - {fileID: 11400000, guid: ca72b60d8f9c02047b32ae29b0597721, type: 2}
+  - {fileID: 11400000, guid: 0140cad2c46b35f4d9a61a3e2dafdd04, type: 2}
+  - {fileID: 11400000, guid: 97dceb42f6aae834d925f7630c6c8623, type: 2}
+--- !u!114 &1062841904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062841897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d297615a1773da34e8b309b0cd342543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  xp: 0
+  xpToUpgrade: 50
+  xpNeededPerLevel: 5
+  attacks:
+  - {fileID: 11400000, guid: ad7aff7680131204a96e02fd5b479093, type: 2}
 --- !u!1 &1125895898
 GameObject:
   m_ObjectHideFlags: 0
