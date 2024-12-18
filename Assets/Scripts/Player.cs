@@ -15,18 +15,16 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        // Get the PlayerMovement component
-        movement = GetComponent<PlayerMovement>();
-        if (movement == null)
+        if (!TryGetComponent<PlayerMovement>(out movement))
         {
             movement = gameObject.AddComponent<PlayerMovement>();
         }
-        // Get the PlayerUpgrades component
-        playerUpgrades = GetComponent<PlayerUpgrades>();
-        if (playerUpgrades == null)
+
+        if (!TryGetComponent<PlayerUpgrades>(out playerUpgrades))
         {
             playerUpgrades = gameObject.AddComponent<PlayerUpgrades>();
         }
+
         foreach (var attack in data.attacks)
         {
             attack.Initialize(gameObject);
@@ -124,24 +122,16 @@ public class Player : MonoBehaviour
         attack.Initialize(gameObject);
     }
 
-    // Method to increase a player stat
-    public void IncreaseStat(PlayerStat stat, int amount)
+    public void IncreaseStat(StatType statType, float amount)
     {
-        switch (stat)
+        AttackStat stat = data.baseStats.Find(s => s.statType == statType);
+        if (stat != null)
         {
-            case PlayerStat.Health:
-                data.health += amount;
-                break;
-            case PlayerStat.Speed:
-                movement.speed += amount;
-                break;
+            stat.value += amount;
+        }
+        else
+        {
+            data.baseStats.Add(new AttackStat { statType = statType, value = amount });
         }
     }
-}
-
-public enum PlayerStat
-{
-    Health,
-    Speed,
-    // Add other player stats as needed
 }

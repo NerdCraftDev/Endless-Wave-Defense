@@ -9,25 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3013aa327d2be946bdcb92b0c57ed05, type: 3}
-  m_Name: BasicHomingMissile
+  m_Script: {fileID: 11500000, guid: bf694f4d2f769864784c077ab1f80f73, type: 3}
+  m_Name: Fireball
   m_EditorClassIdentifier: 
   attackName: 
   stats:
   - statType: 0
     value: 1
   - statType: 1
-    value: 20
+    value: 25
   - statType: 2
-    value: 3
+    value: 1
   - statType: 4
     value: 0.5
   - statType: 5
-    value: 10
-  - statType: 6
-    value: 10
+    value: 3
   - statType: 7
-    value: 10
-  lastUsedTime: 53.532745
+    value: 0
+  lastUsedTime: 4.5071907
   autoAim: 1
-  homingMissilePrefab: {fileID: 6802360650151849930, guid: 663a740f85ada66479553da9518b1937, type: 3}
+  projectilePrefab: {fileID: 6802360650151849930, guid: 9330e24db53289b45a1230f48772be69, type: 3}

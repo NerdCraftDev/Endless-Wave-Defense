@@ -10,6 +10,7 @@ public class Upgrade : ScriptableObject
     public string description;
     public Sprite icon;
     public List<Upgrade> prerequisites = new List<Upgrade>();
+    public bool reusable = false;
 
     public List<Upgrade> GetPrerequisites()
     {
@@ -18,6 +19,6 @@ public class Upgrade : ScriptableObject
 
     public virtual void ApplyUpgrade(GameObject target)
     {
-        target.GetComponent<PlayerUpgrades>().acquiredUpgrades.Add(this);
+        if (!reusable) target.GetComponent<PlayerUpgrades>().acquiredUpgrades.Add(this);
     }
 }

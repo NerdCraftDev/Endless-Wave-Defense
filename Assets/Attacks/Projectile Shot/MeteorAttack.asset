@@ -9,21 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 023e0fc1e9631514ba8d0a3e8e979bc6, type: 3}
-  m_Name: Projectile Circle U2
+  m_Script: {fileID: 11500000, guid: bf694f4d2f769864784c077ab1f80f73, type: 3}
+  m_Name: MeteorAttack
   m_EditorClassIdentifier: 
   attackName: 
   stats:
   - statType: 0
     value: 1
   - statType: 1
+    value: 3
+  - statType: 2
+    value: 15
+  - statType: 4
     value: 5
-  - statType: 6
+  - statType: 5
     value: 5
-  - statType: 3
-    value: 8
-  - statType: 8
-    value: 9
-  lastUsedTime: 0
-  autoAim: 0
-  projectilePrefab: {fileID: 6802360650151849930, guid: a23277dbb59983f4e8480fd59ec19d5d, type: 3}
+  - statType: 7
+    value: 0
+  lastUsedTime: 1283.5106
+  autoAim: 1
+  projectilePrefab: {fileID: 6802360650151849930, guid: 9571eab372a0f694184c54768b3b4d5e, type: 3}

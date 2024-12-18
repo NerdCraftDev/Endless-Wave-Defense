@@ -11,6 +11,8 @@ public class PlayerData : MonoBehaviour
     public int xpNeededPerLevel = 5;
     public List<Attack> attacks;
 
+    public List<AttackStat> baseStats = new List<AttackStat>();
+
     private void Awake()
     {
         if (Instance == null)
@@ -22,5 +24,11 @@ public class PlayerData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public float GetStatValue(StatType statType)
+    {
+        AttackStat stat = baseStats.Find(s => s.statType == statType);
+        return stat != null ? stat.value : 0f;
     }
 }
