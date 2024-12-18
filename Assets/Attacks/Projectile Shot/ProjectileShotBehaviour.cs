@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class HomingMissileBehaviour : MonoBehaviour
+public class ProjectileShotBehaviour : MonoBehaviour
 {
-    private float speed;
+    private Vector3 direction;
+    private float speed = 5f; // Default speed
+    private int damage = 10; // Default damage
+    private int pierce = 1; // Default pierce
     private float rotationSpeed;
-    private int damage;
-    private int pierce;
     private float maxDistance;
 
     private Transform _transform;
@@ -28,7 +29,7 @@ public class HomingMissileBehaviour : MonoBehaviour
         }
         else
         {
-            _transform.position += _transform.right * (Time.deltaTime * speed);
+            _transform.position += direction * (Time.deltaTime * speed);
         }
     }
 
@@ -45,19 +46,21 @@ public class HomingMissileBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(Attack attack, Vector3 direction)
+    public void Initialize(Attack attack, Vector3 direction, PlayerData playerData)
     {
-        speed = attack.GetStat(StatType.Speed);
-        rotationSpeed = attack.GetStat(StatType.RotationSpeed);
-        damage = (int)attack.GetStat(StatType.Damage);
-        pierce = (int)attack.GetStat(StatType.Pierce);
-        maxDistance = attack.GetStat(StatType.MaxHomingDistance);
-        float lifespan = attack.GetStat(StatType.Lifespan);
+        speed = attack.GetStat(StatType.Speed) + playerData.GetStatValue(StatType.Speed);
+        damage = (int)(attack.GetStat(StatType.Damage) + playerData.GetStatValue(StatType.Damage));
+        pierce = (int)attack.GetStat(StatType.Pierce) + (int)playerData.GetStatValue(StatType.Pierce);
+        float lifespan = attack.GetStat(StatType.Lifespan) + playerData.GetStatValue(StatType.Lifespan);
+        rotationSpeed = attack.GetStat(StatType.RotationSpeed) + playerData.GetStatValue(StatType.RotationSpeed);
+        maxDistance = attack.GetStat(StatType.MaxHomingDistance) + playerData.GetStatValue(StatType.MaxHomingDistance);
         Destroy(gameObject, lifespan);
 
         // Set the initial rotation to face the given direction
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        _transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        this.direction = direction;
     }
 
     public static Vector3 FindClosestEnemyDirection(Transform origin, float maxDistance = 100f)

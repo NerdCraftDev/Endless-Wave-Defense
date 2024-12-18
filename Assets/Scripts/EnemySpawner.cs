@@ -15,11 +15,11 @@ public class EnemySpawner : MonoBehaviour
 
     public static EnemySpawner Instance { get; private set; }
     [SerializeField]
-    private double difficultyFactor = 1f;
+    private float difficultyFactor = 1f;
     [SerializeField]
     private float difficultyIncreaseStep = 0.1f;
     [SerializeField]
-    private float difficultyIncreaseTime = 30f;
+    private float difficultyIncreaseTime = 6f;
     private void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
