@@ -2,31 +2,23 @@ using UnityEngine;
 
 public class ProjectileCircleBehaviour : MonoBehaviour
 {
-    private float speed = 5f; // Default speed
-    private float radius = 5f; // Default radius
-    private int damage = 10; // Default damage
-    private Transform origin;
-    private Transform _transform;
-    private float angle;
-
-    void Awake()
-    {
-        _transform = transform;
-    }
+    private float speed;
+    private int damage;
+    private int pierce;
+    private float radius;
+    private Transform owner;
+    private float angleStep;
+    private float currentAngle;
 
     void Update()
     {
-        if (origin != null)
-        {
-            angle += speed * Time.deltaTime;
-            float x = origin.position.x + Mathf.Cos(angle) * radius;
-            float y = origin.position.y + Mathf.Sin(angle) * radius;
-            _transform.position = new Vector3(x, y, _transform.position.z);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // Calculate the new position based on the current angle
+        float posX = owner.position.x + Mathf.Cos(currentAngle) * radius;
+        float posY = owner.position.y + Mathf.Sin(currentAngle) * radius;
+        transform.position = new Vector3(posX, posY, 0f);
+
+        // Rotate the projectile around the owner
+        currentAngle += speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -37,12 +29,17 @@ public class ProjectileCircleBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(float speed, float radius, int damage, Transform origin, int projectileCount, int index)
+    public void Initialize(Attack attack, Transform owner, float radius, int index, int totalProjectiles)
     {
-        this.speed = speed;
+        speed = attack.GetStat(StatType.Speed);
+        damage = (int)attack.GetStat(StatType.Damage);
+        pierce = (int)attack.GetStat(StatType.Pierce);
+
+        this.owner = owner;
         this.radius = radius;
-        this.damage = damage;
-        this.origin = origin;
-        angle = Mathf.Deg2Rad * (360f / projectileCount * index); // Convert degrees to radians
+
+        // Calculate the initial angle for this projectile
+        angleStep = 2 * Mathf.PI / totalProjectiles;
+        currentAngle = index * angleStep;
     }
 }

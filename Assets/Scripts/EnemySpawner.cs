@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
 
     public static EnemySpawner Instance { get; private set; }
     [SerializeField]
-    private float difficultyFactor = 1f;
+    private double difficultyFactor = 1f;
     [SerializeField]
     private float difficultyIncreaseStep = 0.1f;
     [SerializeField]

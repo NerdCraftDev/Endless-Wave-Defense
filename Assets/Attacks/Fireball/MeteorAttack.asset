@@ -13,11 +13,17 @@ MonoBehaviour:
   m_Name: MeteorAttack
   m_EditorClassIdentifier: 
   attackName: 
+  stats:
+  - statType: 0
+    value: 1
+  - statType: 1
+    value: 3
+  - statType: 2
+    value: 15
+  - statType: 4
+    value: 5
+  - statType: 5
+    value: 5
   lastUsedTime: 1283.5106
   autoAim: 1
-  damage: 1
-  cooldown: 5
-  pierce: 15
-  lifespan: 5
-  speed: 3
   fireballPrefab: {fileID: 6802360650151849930, guid: 9571eab372a0f694184c54768b3b4d5e, type: 3}

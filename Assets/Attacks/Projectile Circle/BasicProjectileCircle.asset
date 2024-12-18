@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023e0fc1e9631514ba8d0a3e8e979bc6, type: 3}
   m_Name: BasicProjectileCircle
   m_EditorClassIdentifier: 
+  attackName: 
+  stats:
+  - statType: 0
+    value: 1
+  - statType: 1
+    value: 5
+  - statType: 6
+    value: 5
+  - statType: 3
+    value: 3
+  - statType: 8
+    value: 3
   lastUsedTime: 0
-  cooldown: -1
-  damage: 1
-  pierce: -1
-  lifespan: -1
-  speed: 5
-  radius: 3
-  projectileCount: 3
+  autoAim: 0
   projectilePrefab: {fileID: 6802360650151849930, guid: a23277dbb59983f4e8480fd59ec19d5d, type: 3}

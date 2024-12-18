@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class HomingMissileBehaviour : MonoBehaviour
 {
-    private float speed = 5f; // Default speed
-    private float rotationSpeed = 20f; // Default rotation speed
-    private int damage = 10; // Default damage
-    private int pierce = 1; // Default pierce
-    public float maxDistance = 100f; // Default max distance to search for enemies
+    private float speed;
+    private float rotationSpeed;
+    private int damage;
+    private int pierce;
+    private float maxDistance;
 
     private Transform _transform;
 
@@ -45,13 +45,14 @@ public class HomingMissileBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(float speed, float rotationSpeed, int damage, int pierce, float lifespan, Vector3 direction, float maxHomingDistance)
+    public void Initialize(Attack attack, Vector3 direction)
     {
-        this.speed = speed;
-        this.rotationSpeed = rotationSpeed;
-        this.damage = damage;
-        this.pierce = pierce;
-        maxDistance = maxHomingDistance;
+        speed = attack.GetStat(StatType.Speed);
+        rotationSpeed = attack.GetStat(StatType.RotationSpeed);
+        damage = (int)attack.GetStat(StatType.Damage);
+        pierce = (int)attack.GetStat(StatType.Pierce);
+        maxDistance = attack.GetStat(StatType.MaxHomingDistance);
+        float lifespan = attack.GetStat(StatType.Lifespan);
         Destroy(gameObject, lifespan);
 
         // Set the initial rotation to face the given direction
@@ -62,25 +63,21 @@ public class HomingMissileBehaviour : MonoBehaviour
     public static Vector3 FindClosestEnemyDirection(Transform origin, float maxDistance = 100f)
     {
         Transform closest = null;
-        float closestDistance = float.MaxValue;
+        float closestDistanceSqr = maxDistance * maxDistance;
 
         foreach (var enemy in EnemySpawner.Instance.enemies)
         {
-            float distance = Vector3.Distance(origin.position, enemy.transform.position);
-            if (distance < closestDistance && distance <= maxDistance)
+            if (enemy != null)
             {
-                closestDistance = distance;
-                closest = enemy.transform;
+                float distanceSqr = (enemy.transform.position - origin.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distanceSqr;
+                    closest = enemy.transform;
+                }
             }
         }
 
-        if (closest != null)
-        {
-            return closest.position - origin.position;
-        }
-        else
-        {
-            return Vector3.zero; // No enemies found within maxDistance
-        }
+        return closest != null ? (closest.position - origin.position).normalized : Vector2.zero;
     }
 }

@@ -1145,11 +1145,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7483260305559906605, guid: 129575b7245508e4f8c90c2b66e46fa1, type: 3}
   spawnDistance: 15
-  speed: 3
+  speed: 2
   health: 1
   maxEnemies: 25
   players: []
   enemies: []
+  difficultyFactor: 1
+  difficultyIncreaseStep: 0.1
+  difficultyIncreaseTime: 30
 --- !u!4 &968207960
 Transform:
   m_ObjectHideFlags: 0

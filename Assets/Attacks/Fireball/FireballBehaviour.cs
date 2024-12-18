@@ -32,22 +32,19 @@ public class FireballBehaviour : MonoBehaviour
         }
     }
 
-    public void Initialize(float speed, int damage, int pierce, float lifespan, Vector3 direction, bool autoAim)
+    public void Initialize(Attack attack, Vector3 direction)
     {
-        if (autoAim)
-        {
-            Vector3 closestEnemyDirection = FindClosestEnemyDirection(_transform);
-            this.direction = closestEnemyDirection == Vector3.zero ? direction : closestEnemyDirection;
-        }
-        else
-        {
-            this.direction = direction;
-        }
-
-        this.speed = speed;
-        this.damage = damage;
-        this.pierce = pierce;
+        speed = attack.GetStat(StatType.Speed);
+        damage = (int)attack.GetStat(StatType.Damage);
+        pierce = (int)attack.GetStat(StatType.Pierce);
+        float lifespan = attack.GetStat(StatType.Lifespan);
         Destroy(gameObject, lifespan);
+
+        this.direction = direction.normalized;
+
+        // Set the initial rotation to face the given direction
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     public static Vector3 FindClosestEnemyDirection(Transform origin)

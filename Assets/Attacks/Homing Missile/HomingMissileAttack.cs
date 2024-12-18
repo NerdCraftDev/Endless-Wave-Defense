@@ -1,26 +1,37 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HomingMissileAttack", menuName = "Attacks/Homing Missile")]
+[CreateAssetMenu(fileName = "HomingMissileAttack", menuName = "Attacks/Homing Missile Attack")]
 public class HomingMissileAttack : Attack
 {
-    public float cooldown;
-    public int pierce;
-    public int lifespan;
-    public float speed;
-    public float rotationSpeed;
-    public float maxHomingDistance;
-
-    public GameObject missilePrefab;
+    public GameObject homingMissilePrefab;
 
     public override void Use(GameObject owner)
     {
-        if (Time.time < lastUsedTime + cooldown) return;
+        if (Time.time - lastUsedTime >= GetStat(StatType.Cooldown))
+        {
+            lastUsedTime = Time.time;
 
-        HomingMissileBehaviour missile = Instantiate(missilePrefab, owner.transform.position, Quaternion.identity).GetComponent<HomingMissileBehaviour>();
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (mousePosition - owner.transform.position).normalized;
-        missile.Initialize(speed, rotationSpeed, damage, pierce, lifespan, direction, maxHomingDistance);
+            Vector3 direction;
+            if (autoAim)
+            {
+                // Auto-aim towards the closest enemy
+                Vector3 enemyDirection = HomingMissileBehaviour.FindClosestEnemyDirection(owner.transform, GetStat(StatType.MaxHomingDistance));
+                direction = enemyDirection != Vector3.zero ? enemyDirection.normalized : owner.transform.right;
+            }
+            else
+            {
+                // Get the mouse position in world space
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                mousePos.z = 0f; // Ensure z is zero for 2D
 
-        lastUsedTime = Time.time;
+                // Calculate direction from player to mouse
+                direction = (mousePos - owner.transform.position).normalized;
+            }
+
+            // Instantiate the homing missile and initialize it with stats
+            GameObject missile = Instantiate(homingMissilePrefab, owner.transform.position, Quaternion.identity);
+            HomingMissileBehaviour missileBehaviour = missile.GetComponent<HomingMissileBehaviour>();
+            missileBehaviour.Initialize(this, direction);
+        }
     }
 }
