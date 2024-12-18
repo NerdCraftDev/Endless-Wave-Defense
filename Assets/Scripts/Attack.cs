@@ -7,7 +7,7 @@ public abstract class Attack : ScriptableObject
     public bool autoAim;
     public int damage;
 
-    public virtual void Initialize(GameObject owner) { lastUsedTime = Time.time; autoAim = false; }
+    public virtual void Initialize(GameObject owner) { lastUsedTime = Time.time; autoAim = owner.GetComponent<Player>().autoAttack; }
     public virtual void Use(GameObject owner) {  }
 }
 

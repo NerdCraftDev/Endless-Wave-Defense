@@ -79,7 +79,6 @@ public class Player : MonoBehaviour
                 continue;
             }
             Upgrade option = options[i];
-            Debug.Log(option.upgradeName);
             // Display upgrade details on the buttons
             Transform upgradeBtn = UpgradeGUI.transform.GetChild(options.IndexOf(option));
             upgradeBtn.GetComponentInChildren<TextMeshProUGUI>().text = $"{option.upgradeName}\n\n{option.description}";

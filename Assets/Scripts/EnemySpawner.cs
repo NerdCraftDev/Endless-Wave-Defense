@@ -6,15 +6,20 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnRate = 1f;
     public float spawnDistance = 5f;
     public float speed = 1f;
     public int health = 1;
+    public int maxEnemies = 10;
     public List<Player> players;
     public List<Enemy> enemies;
 
     public static EnemySpawner Instance { get; private set; }
-    
+    [SerializeField]
+    private float difficultyFactor = 1f;
+    [SerializeField]
+    private float difficultyIncreaseStep = 0.1f;
+    [SerializeField]
+    private float difficultyIncreaseTime = 30f;
     private void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -33,14 +38,20 @@ public class EnemySpawner : MonoBehaviour
         foreach (var player in players) {
             StartCoroutine(SpawnEnemies(player));
         }
+
+        // Start increasing difficulty over time
+        StartCoroutine(IncreaseDifficultyOverTime());
     }
 
     private IEnumerator SpawnEnemies(Player player) {
         while (true) {
-            // Spawn an enemy
-            SpawnEnemy(player);
-            // Wait for 1/spawnRate seconds before spawning the next enemy
-            yield return new WaitForSeconds(1/spawnRate);
+            // Check if the number of enemies is less than maxEnemies
+            if (enemies.Count < maxEnemies) {
+                // Spawn an enemy
+                SpawnEnemy(player);
+            }
+            // Wait for a short duration before checking again
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -50,8 +61,15 @@ public class EnemySpawner : MonoBehaviour
         Enemy enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, transform).GetComponent<Enemy>();
         enemy.SetTarget(player.transform);
         enemy.SetSpeed(speed);
-        enemy.SetHealth(health);
+        enemy.SetHealth((int)(health * difficultyFactor));
         enemies.Add(enemy);
+    }
+
+    private IEnumerator IncreaseDifficultyOverTime() {
+        while (true) {
+            yield return new WaitForSeconds(difficultyIncreaseTime);
+            difficultyFactor += difficultyIncreaseStep;
+        }
     }
 
     public void StopSpawning() {
