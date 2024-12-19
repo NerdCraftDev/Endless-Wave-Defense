@@ -10,22 +10,24 @@ public class Player : MonoBehaviour
     private PlayerUpgrades playerUpgrades;
     public PlayerData data;
     public GameObject UpgradeGUI;
+    public GameObject MainMenuGUI;
     public Vector2 Position => transform.position;
     public bool autoAttack = false;
+    private bool upgradeMenuOpen = false;
 
     private void Awake()
     {
-        if (!TryGetComponent<PlayerMovement>(out movement))
+        if (!TryGetComponent(out movement)) // Get the PlayerMovement component
         {
             movement = gameObject.AddComponent<PlayerMovement>();
         }
 
-        if (!TryGetComponent<PlayerUpgrades>(out playerUpgrades))
+        if (!TryGetComponent(out playerUpgrades)) // Get the PlayerUpgrades component
         {
             playerUpgrades = gameObject.AddComponent<PlayerUpgrades>();
         }
 
-        foreach (var attack in data.attacks)
+        foreach (var attack in data.attacks) // Initialize all attacks
         {
             attack.Initialize(gameObject);
         }
@@ -33,23 +35,36 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) || autoAttack)
+        if (Input.GetMouseButton(0) || autoAttack) // Attack when LMB is pressed or if autoAttack is enabled
         {
             Attack();
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            // Toggle autoAim
+        if (Input.GetKeyDown(KeyCode.Space)) // Toggle autoAim
+        {
             autoAttack = !autoAttack;
             foreach (var attack in data.attacks)
             {
                 attack.autoAim = autoAttack;
             }
         }
-        if (data.xp >= data.xpToUpgrade && playerUpgrades.GetAvailableUpgrades().Count > 0)
+        if (data.xp >= data.xpToUpgrade && playerUpgrades.GetAvailableUpgrades().Count > 0) // Show upgrade options when player has enough XP
         {
             ShowUpgradeOptions();
+            upgradeMenuOpen = true;
             data.xp -= data.xpToUpgrade;
             data.xpToUpgrade += data.xpNeededPerLevel;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) // Show main menu when ESC is pressed
+        {
+            if (!MainMenuGUI.activeSelf) {
+                MainMenuGUI.SetActive(true);
+                UpgradeGUI.SetActive(false);
+                Time.timeScale = 0;
+            } else {
+                MainMenuGUI.SetActive(false);
+                UpgradeGUI.SetActive(upgradeMenuOpen);
+                Time.timeScale = upgradeMenuOpen ? 0 : 1;
+            }
         }
     }
 
@@ -86,6 +101,7 @@ public class Player : MonoBehaviour
             upgradeButton.onClick.AddListener(() => option.ApplyUpgrade(gameObject));
             upgradeButton.onClick.AddListener(() => UpgradeGUI.SetActive(false));
             upgradeButton.onClick.AddListener(() => Time.timeScale = 1);
+            upgradeButton.onClick.AddListener(() => upgradeMenuOpen = false);
         }
     }
     public void SetSpeed(float speed)
