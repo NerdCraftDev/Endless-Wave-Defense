@@ -1,14 +1,11 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProjectileShotBehaviour : MonoBehaviour
 {
     private Vector3 direction;
-    private float speed = 5f; // Default speed
-    private int damage = 10; // Default damage
-    private int pierce = 1; // Default pierce
-    private float rotationSpeed;
-    private float maxDistance;
-
+    private Dictionary<StatType, float> stats = new Dictionary<StatType, float>();
     private Transform _transform;
 
     void Awake()
@@ -18,28 +15,33 @@ public class ProjectileShotBehaviour : MonoBehaviour
 
     void Update()
     {
-        Vector2 targetDirection = FindClosestEnemyDirection(_transform, maxDistance);
+        Vector2 targetDirection = FindClosestEnemyDirection(_transform, stats[StatType.MaxHomingDistance]);
         if (targetDirection != Vector2.zero)
         {
-            float step = rotationSpeed * Time.deltaTime;
+            float step = stats[StatType.RotationSpeed] * Time.deltaTime;
             Vector2 newDirection = Vector2.Lerp(_transform.right, targetDirection, step).normalized;
             float angle = Mathf.Atan2(newDirection.y, newDirection.x) * Mathf.Rad2Deg;
             _transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-            _transform.position += (Vector3)newDirection * (Time.deltaTime * speed);
+            _transform.position += (Vector3)newDirection * (Time.deltaTime * stats[StatType.Speed]);
         }
         else
         {
-            _transform.position += direction * (Time.deltaTime * speed);
+            _transform.position += direction * (Time.deltaTime * stats[StatType.Speed]);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (stats[StatType.Pierce] <= 0)
+        {
+            return;
+        }
+
         if (collision.TryGetComponent(out Enemy enemy))
         {
-            enemy.Damage(damage);
-            pierce--;
-            if (pierce <= 0)
+            enemy.Damage((int)stats[StatType.Damage]);
+            stats[StatType.Pierce]--;
+            if (stats[StatType.Pierce] <= 0)
             {
                 Destroy(gameObject);
             }
@@ -48,12 +50,12 @@ public class ProjectileShotBehaviour : MonoBehaviour
 
     public void Initialize(Attack attack, Vector3 direction, PlayerData playerData)
     {
-        speed = attack.GetStat(StatType.Speed) + playerData.GetStatValue(StatType.Speed);
-        damage = (int)(attack.GetStat(StatType.Damage) + playerData.GetStatValue(StatType.Damage));
-        pierce = (int)attack.GetStat(StatType.Pierce) + (int)playerData.GetStatValue(StatType.Pierce);
-        float lifespan = attack.GetStat(StatType.Lifespan) + playerData.GetStatValue(StatType.Lifespan);
-        rotationSpeed = attack.GetStat(StatType.RotationSpeed) + playerData.GetStatValue(StatType.RotationSpeed);
-        maxDistance = attack.GetStat(StatType.MaxHomingDistance) + playerData.GetStatValue(StatType.MaxHomingDistance);
+        foreach (StatType stat in attack.stats.Select(s => s.statType))
+        {
+            stats[stat] = attack.GetStat(stat) + playerData.GetStatValue(stat);
+        }
+
+        float lifespan = stats[StatType.Lifespan];
         Destroy(gameObject, lifespan);
 
         // Set the initial rotation to face the given direction

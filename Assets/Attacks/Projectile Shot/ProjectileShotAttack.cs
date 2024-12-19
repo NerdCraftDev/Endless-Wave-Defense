@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "FireballAttack", menuName = "Attacks/Fireball Attack")]
+[CreateAssetMenu(fileName = "ProjectileShotAttack", menuName = "Attacks/Projectile Shot Attack")]
 public class ProjectileShotAttack : Attack
 {
     public GameObject projectilePrefab;
@@ -30,12 +30,22 @@ public class ProjectileShotAttack : Attack
             }
 
             // Instantiate the fireball and initialize it with stats
-            GameObject fireball = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity);
-            if (fireball.TryGetComponent<ProjectileShotBehaviour>(out var fireballBehaviour))
+            if (owner.TryGetComponent<Player>(out var player))
             {
-                if (owner.TryGetComponent<Player>(out var player))
+                int projectileCount = (int)(GetStat(StatType.ProjectileCount) + player.data.GetStatValue(StatType.ProjectileCount));
+                float angleStep = 15f;
+                float startAngle = -(projectileCount - 1) / 2f * angleStep;
+
+                for (int i = 0; i < projectileCount; i++)
                 {
-                    fireballBehaviour.Initialize(this, direction, player.data);
+                    float angle = startAngle + i * angleStep;
+                    Vector3 spreadDirection = Quaternion.Euler(0, 0, angle) * direction;
+
+                    GameObject fireball = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity);
+                    if (fireball.TryGetComponent<ProjectileShotBehaviour>(out var fireballBehaviour))
+                    {
+                        fireballBehaviour.Initialize(this, spreadDirection, player.data);
+                    }
                 }
             }
         }

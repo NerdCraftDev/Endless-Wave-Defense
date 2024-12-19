@@ -133,5 +133,16 @@ public class Player : MonoBehaviour
         {
             data.baseStats.Add(new AttackStat { statType = statType, value = amount });
         }
+
+        if (statType == StatType.ProjectileCount)
+        {
+            foreach (var attack in data.attacks)
+            {
+                if (attack is ProjectileCircleAttack circleAttack)
+                {
+                    circleAttack.CalculateProjectiles(gameObject);
+                }
+            }
+        }
     }
 }

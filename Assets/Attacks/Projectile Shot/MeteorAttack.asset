@@ -17,15 +17,19 @@ MonoBehaviour:
   - statType: 0
     value: 1
   - statType: 1
-    value: 3
+    value: 25
   - statType: 2
-    value: 15
+    value: 1
   - statType: 4
-    value: 5
+    value: 0.5
   - statType: 5
-    value: 5
+    value: 3
   - statType: 7
     value: 0
+  - statType: 6
+    value: 3
+  - statType: 3
+    value: 1
   lastUsedTime: 1283.5106
   autoAim: 1
   projectilePrefab: {fileID: 6802360650151849930, guid: 9571eab372a0f694184c54768b3b4d5e, type: 3}

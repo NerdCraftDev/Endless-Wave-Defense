@@ -1349,12 +1349,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acquiredUpgrades: []
   allUpgrades:
-  - {fileID: 11400000, guid: b851e4d3ba86b094180d95fff303a771, type: 2}
   - {fileID: 11400000, guid: 10600407e4ae13f47b2c67f1d0b469e4, type: 2}
-  - {fileID: 11400000, guid: ca72b60d8f9c02047b32ae29b0597721, type: 2}
   - {fileID: 11400000, guid: 97dceb42f6aae834d925f7630c6c8623, type: 2}
-  - {fileID: 11400000, guid: 533a5da20cecb0b41b340f0b2af98614, type: 2}
+  - {fileID: 11400000, guid: b851e4d3ba86b094180d95fff303a771, type: 2}
+  - {fileID: 11400000, guid: ca72b60d8f9c02047b32ae29b0597721, type: 2}
   - {fileID: 11400000, guid: ec5f9cc784cbb4f4eba660f31f67ad88, type: 2}
+  - {fileID: 11400000, guid: 533a5da20cecb0b41b340f0b2af98614, type: 2}
+  - {fileID: 11400000, guid: 5362a6fcc53993847843b24e381cacd9, type: 2}
+  - {fileID: 11400000, guid: f90856741a1a3be4d9bbc44aa280a269, type: 2}
 --- !u!114 &1062841904
 MonoBehaviour:
   m_ObjectHideFlags: 0
