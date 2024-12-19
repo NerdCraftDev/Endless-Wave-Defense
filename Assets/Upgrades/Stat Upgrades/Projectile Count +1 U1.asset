@@ -10,13 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28669f5f033a53a44b7e7da47cb136e5, type: 3}
-  m_Name: Projectile Count +1
+  m_Name: Projectile Count +1 U1
   m_EditorClassIdentifier: 
   upgradeName: Projectile Count Upgrade
-  description: +1 Projectile for all attacks
+  description: +1 Projectile for all attacks, Lifespan -0.5s
   icon: {fileID: 0}
-  prerequisites: []
-  reusable: 0
+  prerequisites:
+  - {fileID: 11400000, guid: f90856741a1a3be4d9bbc44aa280a269, type: 2}
+  reusable: 1
   stats:
   - statType: 3
     value: 1
+  - statType: 5
+    value: -0.5

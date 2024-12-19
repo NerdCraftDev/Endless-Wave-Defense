@@ -9,8 +9,9 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         // Move towards the player
-        Vector2 direction = (target.position - transform.position).normalized;
-        Move(direction * (Time.deltaTime * speed));
+        Vector2 direction = target.position - transform.position;
+        if (direction.magnitude > EnemySpawner.Instance.spawnDistance * 1.5f) { Die(); return;}
+        Move(direction.normalized * (Time.deltaTime * speed));
     }
 
     public void Move(Vector2 direction)

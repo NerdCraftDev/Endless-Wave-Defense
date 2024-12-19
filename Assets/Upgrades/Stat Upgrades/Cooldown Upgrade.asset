@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28669f5f033a53a44b7e7da47cb136e5, type: 3}
-  m_Name: Projectile Count +1
+  m_Name: Cooldown Upgrade
   m_EditorClassIdentifier: 
-  upgradeName: Projectile Count Upgrade
-  description: +1 Projectile for all attacks
+  upgradeName: Cooldown Upgrade
+  description: -0.1s Cooldown on all attacks
   icon: {fileID: 0}
   prerequisites: []
-  reusable: 0
+  reusable: 1
   stats:
-  - statType: 3
-    value: 1
+  - statType: 4
+    value: -0.1

@@ -55,7 +55,7 @@ public class ProjectileShotBehaviour : MonoBehaviour
             stats[stat] = attack.GetStat(stat) + playerData.GetStatValue(stat);
         }
 
-        float lifespan = stats[StatType.Lifespan];
+        float lifespan = Mathf.Max(0.1f, stats[StatType.Lifespan]);
         Destroy(gameObject, lifespan);
 
         // Set the initial rotation to face the given direction

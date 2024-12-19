@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ProjectileShotAttack", menuName = "Attacks/Projectile Shot Attack")]
@@ -33,20 +34,30 @@ public class ProjectileShotAttack : Attack
             if (owner.TryGetComponent<Player>(out var player))
             {
                 int projectileCount = (int)(GetStat(StatType.ProjectileCount) + player.data.GetStatValue(StatType.ProjectileCount));
-                float angleStep = 15f;
-                float startAngle = -(projectileCount - 1) / 2f * angleStep;
 
-                for (int i = 0; i < projectileCount; i++)
+                GameObject fireball = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity);
+                if (fireball.TryGetComponent<ProjectileShotBehaviour>(out var fireballBehaviour))
                 {
-                    float angle = startAngle + i * angleStep;
-                    Vector3 spreadDirection = Quaternion.Euler(0, 0, angle) * direction;
-
-                    GameObject fireball = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity);
-                    if (fireball.TryGetComponent<ProjectileShotBehaviour>(out var fireballBehaviour))
-                    {
-                        fireballBehaviour.Initialize(this, spreadDirection, player.data);
-                    }
+                    fireballBehaviour.Initialize(this, direction, player.data);
                 }
+                SpawnExtraProjectiles(projectileCount-1, direction, owner, player);
+            }
+        }
+    }
+
+    private IEnumerator SpawnExtraProjectiles(int projectileCount, Vector3 direction, GameObject owner, Player player) {
+        yield return new WaitForSeconds(0.1f);
+        float angleStep = 15f;
+        float startAngle = -(projectileCount - 1) / 2f * angleStep;
+        for (int i = 0; i < projectileCount; i++)
+        {
+            float angle = startAngle + i * angleStep;
+            Vector3 spreadDirection = Quaternion.Euler(0, 0, angle) * direction;
+
+            GameObject fireball = Instantiate(projectilePrefab, owner.transform.position, Quaternion.identity);
+            if (fireball.TryGetComponent<ProjectileShotBehaviour>(out var fireballBehaviour))
+            {
+                fireballBehaviour.Initialize(this, spreadDirection, player.data);
             }
         }
     }

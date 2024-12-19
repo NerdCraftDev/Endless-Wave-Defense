@@ -1122,7 +1122,7 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 14.394755, y: 1.1841285, z: 8.366883}
+    m_Target: {x: -40.898853, y: 8.61981, z: 11.33691}
     speed: 2
     m_Value: {x: 14.394755, y: 1.1841285, z: 8.366883}
   m_RenderMode: 0
@@ -1174,7 +1174,7 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 18.855597
+    m_Target: 48.652733
     speed: 2
     m_Value: 18.855597
   m_Ortho:
@@ -1254,7 +1254,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Attacks/Fireball
+    - Assets/Attacks
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1273,7 +1273,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: bcb70000
     m_LastClickedID: 47036
-    m_ExpandedIDs: 000000003cb50000
+    m_ExpandedIDs: 000000003eb50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1302,7 +1302,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003cb50000
+    m_ExpandedIDs: 000000003eb50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

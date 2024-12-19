@@ -16,4 +16,5 @@ MonoBehaviour:
   description: Shoot a homing projectile with 3 pierce.
   icon: {fileID: 0}
   prerequisites: []
-  attack: {fileID: 11400000, guid: aa4471317c5130f4ba50c1c3684315e5, type: 2}
+  reusable: 0
+  attack: {fileID: 11400000, guid: eb13d6803e9ea934eb8f93f18e609c07, type: 2}
