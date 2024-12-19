@@ -16,7 +16,7 @@ MonoBehaviour:
   description: -0.1s Cooldown on all attacks
   icon: {fileID: 0}
   prerequisites: []
-  reusable: 1
+  reusable: 0
   stats:
   - statType: 4
     value: -0.1

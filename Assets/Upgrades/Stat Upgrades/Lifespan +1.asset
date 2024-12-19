@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Lifespan +1
   m_EditorClassIdentifier: 
   upgradeName: Lifespan Upgrade
-  description: +1s Lifespan
+  description: +0.2s Lifespan
   icon: {fileID: 0}
   prerequisites: []
   reusable: 1
   stats:
   - statType: 5
-    value: 1
+    value: 0.2

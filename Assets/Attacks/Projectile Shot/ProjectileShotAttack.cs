@@ -8,7 +8,7 @@ public class ProjectileShotAttack : Attack
 
     public override void Use(GameObject owner)
     {
-        if (Time.time - lastUsedTime >= GetStat(StatType.Cooldown))
+        if (Time.time - lastUsedTime >= GetStat(StatType.Cooldown) + owner.GetComponent<Player>().data.GetStatValue(StatType.Cooldown))
         {
             lastUsedTime = Time.time;
 
@@ -40,13 +40,13 @@ public class ProjectileShotAttack : Attack
                 {
                     fireballBehaviour.Initialize(this, direction, player.data);
                 }
-                SpawnExtraProjectiles(projectileCount-1, direction, owner, player);
+                owner.GetComponent<MonoBehaviour>().StartCoroutine(SpawnExtraProjectilesCoroutine(projectileCount - 1, direction, owner, player));
             }
         }
     }
 
-    private IEnumerator SpawnExtraProjectiles(int projectileCount, Vector3 direction, GameObject owner, Player player) {
-        yield return new WaitForSeconds(0.1f);
+    private IEnumerator SpawnExtraProjectilesCoroutine(int projectileCount, Vector3 direction, GameObject owner, Player player) {
+        yield return new WaitForSeconds(1/GetStat(StatType.Speed));
         float angleStep = 15f;
         float startAngle = -(projectileCount - 1) / 2f * angleStep;
         for (int i = 0; i < projectileCount; i++)

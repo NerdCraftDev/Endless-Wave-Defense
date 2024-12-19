@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Projectile Count +1 U1
   m_EditorClassIdentifier: 
   upgradeName: Projectile Count Upgrade
-  description: +1 Projectile for all attacks, Lifespan -0.5s
+  description: +1 Projectile for all attacks, Lifespan -0.1s
   icon: {fileID: 0}
   prerequisites:
   - {fileID: 11400000, guid: f90856741a1a3be4d9bbc44aa280a269, type: 2}
@@ -22,4 +22,4 @@ MonoBehaviour:
   - statType: 3
     value: 1
   - statType: 5
-    value: -0.5
+    value: -0.1
